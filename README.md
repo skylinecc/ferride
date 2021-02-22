@@ -1,2 +1,2 @@
 # ride
-Reserved for future use...
+A Simple, Cross-platform Rust IDE
