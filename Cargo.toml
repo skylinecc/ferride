@@ -1,0 +1,12 @@
+[package]
+name = "ride"
+version = "0.1.0"
+authors = ["Grant Handy <grantshandy@gmail.com>"]
+edition = "2018"
+license = "GNU-3.0"
+description = "Reserved for future use"
+homepage = "https://github.com/skylinecc/ride"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
