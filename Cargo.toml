@@ -1,11 +1,11 @@
 [package]
 name = "ride"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Grant Handy <grantshandy@gmail.com>"]
 edition = "2018"
 license = "GPL-3.0"
-description = "Reserved for future use"
-homepage = "https://github.com/skylinecc/ride"
+description = "A Simple, Cross-platform Rust IDE"
+repository = "https://github.com/skylinecc/ride"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
