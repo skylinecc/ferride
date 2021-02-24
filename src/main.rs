@@ -1,7 +1,7 @@
 use gtk::prelude::*;
 use std::env::args;
 
-mod window;
+mod welcome;
 
 fn main() {
     let application = gtk::Application::new(Some("org.skylinecc.Ride"), Default::default())
@@ -13,7 +13,7 @@ fn main() {
     gtk::gio::resources_register(&res);
 
     application.connect_activate(|app| {
-        let welcome = window::WelcomeWindow::build_ui(app);
+        let welcome = welcome::WelcomeWindow::build_ui(app);
         app.add_window(&welcome.window);
 
         welcome.window.present();
