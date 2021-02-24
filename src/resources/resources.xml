@@ -2,6 +2,5 @@
 <gresources>
   <gresource prefix="/org/skylinecc/Ride">
     <file>rust_logo.svg</file>
-    <file>welcome.ui</file>
   </gresource>
 </gresources>

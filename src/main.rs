@@ -15,6 +15,9 @@ fn main() {
 
     application.connect_activate(|app| {
         let welcome = window::WelcomeWindow::build_ui(app);
+        app.add_window(&welcome.window);
+
+        welcome.window.present();
     });
 
     application.run(&args().collect::<Vec<_>>());
