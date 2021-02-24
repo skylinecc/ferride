@@ -4,9 +4,8 @@ use std::env::args;
 mod window;
 
 fn main() {
-    let application =
-        gtk::Application::new(Some("org.skylinecc.Ride"), Default::default())
-            .expect("Initialization failed...");
+    let application = gtk::Application::new(Some("org.skylinecc.Ride"), Default::default())
+        .expect("Initialization failed...");
 
     let resources_bytes = include_bytes!("resources/resources.gresource");
     let resource_data = gtk::glib::Bytes::from(&resources_bytes[..]);
