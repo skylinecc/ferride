@@ -11,6 +11,17 @@ impl MainWindow {
         let window = gtk::ApplicationWindow::new(app);
         window.set_default_size(1200, 650);
 
+        let mut myself = Self {
+            window,
+        };
+
+        myself.window.present();
+        myself.set_project_details(path);
+
+        return myself;
+    }
+
+    fn set_project_details(&mut self, path: PathBuf) {
         let package_name = match get_name(path) {
             Ok(data) => data,
             Err(error) => {
@@ -19,12 +30,6 @@ impl MainWindow {
             }
         };
 
-        window.set_title(Some(&format!("{} - ride", package_name)));
-
-        window.present();
-
-        Self {
-            window,
-        }
+        self.window.set_title(Some(&format!("{} - Ride", package_name)));
     }
 }
