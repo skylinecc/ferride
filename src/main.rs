@@ -7,7 +7,7 @@ mod window;
 mod project;
 
 fn main() {
-    let application = gtk::Application::new(Some("org.skylinecc.Ride"), Default::default())
+    let application = gtk::Application::new(Some("org.skylinecc.Ferride"), Default::default())
         .expect("Initialization failed...");
 
     let resources_bytes = include_bytes!("resources/resources.gresource");

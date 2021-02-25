@@ -1,4 +1,5 @@
-# ride
-**VERY WORK IN PROGRESS!!**
+# (WIP) Ferride
 
-A Simple, Cross-platform Rust IDE
+A Simple, Cross-platform Rust IDE.
+
+"*Ferris' IDE*"

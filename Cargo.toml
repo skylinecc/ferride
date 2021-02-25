@@ -1,6 +1,6 @@
 [package]
-name = "ride"
-version = "0.1.1"
+name = "ferride"
+version = "0.1.0"
 authors = ["Grant Handy <grantshandy@gmail.com>"]
 edition = "2018"
 license = "GPL-3.0"

@@ -29,10 +29,10 @@ impl WelcomeWindow {
 
         let title_label = gtk::Label::new(None);
         title_label.set_markup(&format!(
-            "<span weight=\"bold\" size=\"xx-large\">Ride</span>"
+            "<span weight=\"bold\" size=\"xx-large\">Ferride</span>"
         ));
 
-        let title_image = gtk::Image::from_resource("/org/skylinecc/Ride/rust_logo.svg");
+        let title_image = gtk::Image::from_resource("/org/skylinecc/Ferride/rust_logo.svg");
         title_image.set_size_request(50, 50);
 
         title_box.append(&title_label);
@@ -59,20 +59,20 @@ impl WelcomeWindow {
 
         let homepage_link = gtk::Label::new(None);
         homepage_link.set_markup(&format!(
-            "<a href=\"https://skylinecc.github.io/ride/\" title=\"Website\">Homepage</a>"
+            "<a href=\"https://skylinecc.github.io/ferride/\" title=\"Website\">Homepage</a>"
         ));
         homepage_link.set_halign(gtk::Align::Center);
         link_box.append(&homepage_link);
 
         let repository_link = gtk::Label::new(None);
         repository_link.set_markup(&format!(
-            "<a href=\"https://github.com/skylinecc/ride/\" title=\"Repository\">Source Code</a>"
+            "<a href=\"https://github.com/skylinecc/ferride/\" title=\"Repository\">Source Code</a>"
         ));
         repository_link.set_halign(gtk::Align::Center);
         link_box.append(&repository_link);
 
         let authors_link = gtk::Label::new(None);
-        authors_link.set_markup(&format!("<a href=\"https://github.com/skylinecc/ride/graphs/contributors\" title=\"Contributors\">Authors</a>"));
+        authors_link.set_markup(&format!("<a href=\"https://github.com/skylinecc/ferride/graphs/contributors\" title=\"Contributors\">Authors</a>"));
         authors_link.set_halign(gtk::Align::Center);
         link_box.append(&authors_link);
 
