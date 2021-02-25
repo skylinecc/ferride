@@ -4,6 +4,7 @@ use gtk::glib::clone;
 
 mod welcome;
 mod window;
+mod project;
 
 fn main() {
     let application = gtk::Application::new(Some("org.skylinecc.Ride"), Default::default())

@@ -111,7 +111,7 @@ impl WelcomeWindow {
                     None => "str error",
                 };
 
-                println!("path: {}", path_str);
+                println!("Opening Project: {}", path_str);
 
                 MainWindow::run(path, &app);
             };
