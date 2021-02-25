@@ -13,7 +13,7 @@ impl WelcomeWindow {
         application.add_window(&window);
 
         window.set_title(Some("Welcome"));
-        window.set_default_size(400, 500);
+        window.set_default_size(400, 400);
         window.set_resizable(false);
 
         let window_box = gtk::Box::new(gtk::Orientation::Vertical, 10);
@@ -117,7 +117,10 @@ impl WelcomeWindow {
             };
 
             d.close();
-            window.close();
+
+            if response == gtk::ResponseType::Ok {
+                window.close();
+            };
         }));
 
         file_chooser.show();
