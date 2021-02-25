@@ -1,7 +1,9 @@
 use gtk::prelude::*;
 use std::env::args;
+use gtk::glib::clone;
 
 mod welcome;
+mod window;
 
 fn main() {
     let application = gtk::Application::new(Some("org.skylinecc.Ride"), Default::default())
@@ -12,12 +14,9 @@ fn main() {
     let res = gtk::gio::Resource::from_data(&resource_data).unwrap();
     gtk::gio::resources_register(&res);
 
-    application.connect_activate(|app| {
-        let welcome = welcome::WelcomeWindow::build_ui(app);
-        app.add_window(&welcome.window);
-
-        welcome.window.present();
-    });
+    application.connect_activate(clone!(@strong application => move |_| {
+        let welcome = welcome::WelcomeWindow::build_ui(&application);
+    }));
 
     application.run(&args().collect::<Vec<_>>());
 }

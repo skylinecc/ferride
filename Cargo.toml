@@ -12,3 +12,4 @@ repository = "https://github.com/skylinecc/ride"
 [dependencies]
 gtk = { git = "https://github.com/gtk-rs/gtk4-rs", package = "gtk4" }
 gtk-macros = "0.2.0"
+glib = "0.10.3"

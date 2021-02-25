@@ -1,5 +1,7 @@
+use gtk::glib;
 use gtk::glib::clone;
 use gtk::prelude::*;
+use crate::window::MainWindow;
 
 pub struct WelcomeWindow {
     pub window: gtk::ApplicationWindow,
@@ -8,6 +10,7 @@ pub struct WelcomeWindow {
 impl WelcomeWindow {
     pub fn build_ui(application: &gtk::Application) -> Self {
         let window = gtk::ApplicationWindow::new(application);
+        application.add_window(&window);
 
         window.set_title(Some("Welcome"));
         window.set_default_size(400, 500);
@@ -74,19 +77,21 @@ impl WelcomeWindow {
         link_box.append(&authors_link);
 
         // Open Project
-        open_button.connect_clicked(clone!(@strong window => move |_| {
-
+        open_button.connect_clicked(clone!(@strong window, @strong application => move |_| {
+            WelcomeWindow::open_project(&window, &application);
         }));
 
-        Self { window }
+        window.present();
+
+        Self {
+            window,
+        }
     }
 
-    pub fn open_project(window: gtk::ApplicationWindow) -> std::path::PathBuf {
-        println!("Opening Project...");
-
+    pub fn open_project(window: &gtk::ApplicationWindow, app: &gtk::Application) {
         let file_chooser = gtk::FileChooserDialog::new(
             Some("Open Cargo.toml"),
-            Some(&window),
+            Some(window),
             gtk::FileChooserAction::Open,
             &[("Open", gtk::ResponseType::Ok), ("Cancel", gtk::ResponseType::Cancel)],
         );
@@ -96,16 +101,24 @@ impl WelcomeWindow {
         cargo_filter.add_pattern("Cargo.toml");
         file_chooser.add_filter(&cargo_filter);
 
-        file_chooser.connect_response(move |d: &gtk::FileChooserDialog, response: gtk::ResponseType| {
+        file_chooser.connect_response(clone!(@strong window, @strong app => move |d: &gtk::FileChooserDialog, response: gtk::ResponseType| {
             if response == gtk::ResponseType::Ok {
                 let file = d.get_file().expect("Couldn't get project file");
                 let path = file.get_path().expect("Error getting project path");
 
-                return path;
+                let path_str = match path.to_str() {
+                    Some(data) => data,
+                    None => "str error",
+                };
+
+                println!("path: {}", path_str);
+
+                MainWindow::run(path, &app);
             };
 
             d.close();
-        });
+            window.close();
+        }));
 
         file_chooser.show();
     }
