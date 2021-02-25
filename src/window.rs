@@ -33,6 +33,7 @@ impl MainWindow {
         let content_h_pane = gtk::Paned::new(gtk::Orientation::Horizontal);
         window_box.append(&content_h_pane);
         content_h_pane.set_vexpand(true);
+        content_h_pane.set_position(250);
 
         // File Manager
         let file_manager_frame = gtk::Frame::new(Some("File Manager"));
@@ -43,6 +44,7 @@ impl MainWindow {
         // Content Pane (top vs bottom)
         let content_v_pane = gtk::Paned::new(gtk::Orientation::Vertical);
         content_h_pane.set_end_child(&content_v_pane);
+        content_v_pane.set_position(440);
 
         // Text Editor
         let text_editor_frame = gtk::Frame::new(Some("Text Editor"));
