@@ -1,12 +1,19 @@
 use gtk::prelude::*;
 use std::env::args;
 use gtk::glib::clone;
+use std::process::Command;
+
+extern crate pretty_env_logger;
+#[macro_use] extern crate log;
 
 mod welcome;
 mod window;
 mod project;
+mod info;
 
 fn main() {
+    pretty_env_logger::init();
+
     let application = gtk::Application::new(Some("org.skylinecc.Ferride"), Default::default())
         .expect("Initialization failed...");
 
@@ -16,7 +23,7 @@ fn main() {
     gtk::gio::resources_register(&res);
 
     application.connect_activate(clone!(@strong application => move |_| {
-        let welcome = welcome::WelcomeWindow::build_ui(&application);
+        welcome::WelcomeWindow::build_ui(&application);
     }));
 
     application.run(&args().collect::<Vec<_>>());

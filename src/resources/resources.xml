@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/org/skylinecc/Ferride">
     <file>rust_logo.svg</file>
+    <file>rustacean-flat-gesture.svg</file>
   </gresource>
 </gresources>

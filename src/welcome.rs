@@ -13,18 +13,16 @@ impl WelcomeWindow {
         application.add_window(&window);
 
         window.set_title(Some("Welcome"));
-        window.set_default_size(400, 400);
+        window.set_default_size(300, 400);
         window.set_resizable(false);
 
-        let window_box = gtk::Box::new(gtk::Orientation::Vertical, 10);
+        let window_box = gtk::Box::new(gtk::Orientation::Vertical, 12);
         window.set_child(Some(&window_box));
-        window_box.set_margin_end(12);
-        window_box.set_margin_start(12);
         window_box.set_margin_top(12);
         window_box.set_margin_bottom(12);
 
         // Set all the stupid boilerplate code...
-        let title_box = gtk::Box::new(gtk::Orientation::Horizontal, 12);
+        let title_box = gtk::Box::new(gtk::Orientation::Horizontal, 8);
         title_box.set_halign(gtk::Align::Center);
 
         let title_label = gtk::Label::new(None);
@@ -32,8 +30,8 @@ impl WelcomeWindow {
             "<span weight=\"bold\" size=\"xx-large\">Ferride</span>"
         ));
 
-        let title_image = gtk::Image::from_resource("/org/skylinecc/Ferride/rust_logo.svg");
-        title_image.set_size_request(50, 50);
+        let title_image = gtk::Image::from_resource("/org/skylinecc/Ferride/rustacean-flat-gesture.svg");
+        title_image.set_size_request(75, 75);
 
         title_box.append(&title_label);
         title_box.append(&title_image);
@@ -41,9 +39,41 @@ impl WelcomeWindow {
 
         let subtitle_label = gtk::Label::new(None);
         subtitle_label.set_markup(&format!(
-            "<span weight=\"light\" size=\"small\">A simple Rust IDE</span>"
+            "<span weight=\"light\" size=\"small\">Ferris' Simple, Cross Platform IDE</span>"
         ));
         window_box.append(&subtitle_label);
+
+        let rustc_version: String = match crate::info::rustc_version() {
+            Ok(data) => data,
+            Err(_) => {
+                let message_dialog = gtk::MessageDialogBuilder::new()
+                    .transient_for(&window)
+                    .title("Rust Not Installed")
+                    .text("Ferride requires rust to be installed to compile and execute programs. Please install <a href=\"https://www.rust-lang.org/tools/install\">Rust</a>")
+                    .resizable(false)
+                    .use_markup(true)
+                    .buttons(gtk::ButtonsType::Ok)
+                    .focusable(true)
+                    .build();
+
+                message_dialog.show();
+
+                message_dialog.connect_response(move |d: &gtk::MessageDialog, _: gtk::ResponseType| {
+                    d.hide();
+                    std::process::exit(1);
+                });
+
+                message_dialog.show();
+
+                String::from("Rust Not Installed")
+            },
+        };
+
+        // rustc version thing...
+        let rustc_version_label = gtk::Label::new(None);
+        rustc_version_label.set_markup(&format!("<span weight=\"light\" size=\"small\">{}</span>", rustc_version));
+        window_box.append(&rustc_version_label);
+        rustc_version_label.set_halign(gtk::Align::Center);
 
         let dummy_label = gtk::Label::new(None);
         dummy_label.set_vexpand(true);
@@ -93,7 +123,7 @@ impl WelcomeWindow {
             Some("Open Cargo.toml"),
             Some(window),
             gtk::FileChooserAction::Open,
-            &[("Open", gtk::ResponseType::Ok), ("Cancel", gtk::ResponseType::Cancel)],
+            &[("Select", gtk::ResponseType::Ok), ("Cancel", gtk::ResponseType::Cancel)],
         );
 
         let cargo_filter = gtk::FileFilter::new();
@@ -111,7 +141,7 @@ impl WelcomeWindow {
                     None => "str error",
                 };
 
-                println!("Opening Project: {}", path_str);
+               info!("Opening Project: {}", path_str);
 
                 MainWindow::run(path, &app);
             };

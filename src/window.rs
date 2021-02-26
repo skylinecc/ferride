@@ -51,6 +51,7 @@ impl MainWindow {
         content_v_pane.set_start_child(&text_editor_frame);
         let text_editor_box = gtk::Box::new(gtk::Orientation::Vertical, 0);
         text_editor_frame.set_child(Some(&text_editor_box));
+        // text_editor_box.append(myself.sourceview(path));
 
         // Terminal
         let terminal_frame = gtk::Frame::new(Some("Terminal"));
@@ -60,6 +61,7 @@ impl MainWindow {
 
         myself.set_project_details(path);
         myself.window.present();
+        myself.window.fullscreen();
 
         return myself;
     }
@@ -73,6 +75,22 @@ impl MainWindow {
             }
         };
 
-        self.window.set_title(Some(&format!("{} - Ride", package_name)));
+        self.window.set_title(Some(&format!("{} - Ferride", package_name)));
     }
+
+    // fn sourceview(&mut self, path: Pathbuf) -> gtk::ScrolledWindowBuilder {
+    //     let source_code = std::fs::read_to_string(&path).unwrap();
+
+    //     let buffer = sourceview::BufferBuilder::new()
+    //         .highlight_syntax(true)
+    //         .text(&source_code)
+    //         .build();
+
+    //     let sourceview = sourceview::View::new_with_buffer(&buffer);
+
+    //     let scrolled_window = gtk::ScrolledWindowBuilder::new().build();
+    //     scrolled_window.add(&sourceview);
+
+    //     return scrolled_window;
+    // }
 }
