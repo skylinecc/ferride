@@ -1,15 +1,14 @@
 use gtk::prelude::*;
 use std::env::args;
 use gtk::glib::clone;
-use std::process::Command;
 
 extern crate pretty_env_logger;
 #[macro_use] extern crate log;
 
-mod welcome;
+mod greeter;
 mod window;
-mod project;
 mod info;
+mod project;
 
 fn main() {
     pretty_env_logger::init();
@@ -23,7 +22,7 @@ fn main() {
     gtk::gio::resources_register(&res);
 
     application.connect_activate(clone!(@strong application => move |_| {
-        welcome::WelcomeWindow::build_ui(&application);
+        greeter::GreeterWindow::build_ui(&application);
     }));
 
     application.run(&args().collect::<Vec<_>>());

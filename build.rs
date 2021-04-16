@@ -9,13 +9,4 @@ fn main() {
         ])
         .output()
         .expect("failed to execute glib-compile-resources");
-
-    // Update the alacritty submodule...
-    Command::new("sh")
-        .args(&[
-            "-c",
-            "git submodule update --init alacritty",
-        ])
-        .output()
-        .expect("failed to git submodule update --init alacritty");
 }

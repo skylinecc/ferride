@@ -1,13 +1,14 @@
-use gtk::glib;
 use gtk::glib::clone;
 use gtk::prelude::*;
 use crate::window::MainWindow;
+use crate::info::gtk_error;
+use crate::project::Project;
 
-pub struct WelcomeWindow {
+pub struct GreeterWindow {
     pub window: gtk::ApplicationWindow,
 }
 
-impl WelcomeWindow {
+impl GreeterWindow {
     pub fn build_ui(application: &gtk::Application) -> Self {
         let window = gtk::ApplicationWindow::new(application);
         application.add_window(&window);
@@ -46,24 +47,7 @@ impl WelcomeWindow {
         let rustc_version: String = match crate::info::rustc_version() {
             Ok(data) => data,
             Err(_) => {
-                let message_dialog = gtk::MessageDialogBuilder::new()
-                    .transient_for(&window)
-                    .title("Rust Not Installed")
-                    .text("Ferride requires rust to be installed to compile and execute programs. Please install <a href=\"https://www.rust-lang.org/tools/install\">Rust</a>")
-                    .resizable(false)
-                    .use_markup(true)
-                    .buttons(gtk::ButtonsType::Ok)
-                    .focusable(true)
-                    .build();
-
-                message_dialog.show();
-
-                message_dialog.connect_response(move |d: &gtk::MessageDialog, _: gtk::ResponseType| {
-                    d.hide();
-                    std::process::exit(1);
-                });
-
-                message_dialog.show();
+                gtk_error("Rust Not Installed", "Ferride requires rust to be installed to compile and execute programs. Please install <a href=\"https://www.rust-lang.org/tools/install\">Rust</a>", Some(&window));
 
                 String::from("Rust Not Installed")
             },
@@ -108,7 +92,7 @@ impl WelcomeWindow {
 
         // Open Project
         open_button.connect_clicked(clone!(@strong window, @strong application => move |_| {
-            WelcomeWindow::open_project(&window, &application);
+            GreeterWindow::open_project(&window, &application);
         }));
 
         window.present();
@@ -136,14 +120,11 @@ impl WelcomeWindow {
                 let file = d.get_file().expect("Couldn't get project file");
                 let path = file.get_path().expect("Error getting project path");
 
-                let path_str = match path.to_str() {
-                    Some(data) => data,
-                    None => "str error",
-                };
+                trace!("Opening Project: {}", path.to_str().unwrap());
 
-               info!("Opening Project: {}", path_str);
+                let project = Project::new(&path);
 
-                MainWindow::run(path, &app);
+                MainWindow::run(project, &app);
             };
 
             d.close();
