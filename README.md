@@ -4,6 +4,10 @@ A Simple, Cross-platform Rust IDE.
 
 "*Ferris' IDE*"
 
+![greeter window](docs/greeter.png)
+
+*The Greeter Window*
+
 ## Planned Core Features
 - [ ] Customizable GTK Interface (Want it to look more legacy, menu bar, etc, no GNOME headerbar type thing so we can use it more natively on Windows and Macos (ew)).
 - [ ] Sections for a terminal, text editor, file manager, and a file overview (structs, functions, traits, enums, etc).
