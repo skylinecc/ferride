@@ -1,8 +1,6 @@
 use std::path::PathBuf;
 use cargo_toml::Manifest;
 
-use crate::info::gtk_error;
-
 #[derive(Clone, PartialEq)]
 pub struct Project{
     pub name: String,
@@ -11,29 +9,27 @@ pub struct Project{
 }
 
 impl Project {
-    pub fn new(path: &PathBuf) -> Self {
+    pub fn new(path: &PathBuf) -> Result<Self, (String, String)> {
         let manifest = match Manifest::from_path(path) {
             Ok(data) => data,
             Err(error) => {
-                gtk_error("Couldn't get Cargo.toml manifest", error.to_string().as_str(), None);
-                std::process::exit(1);
+                return Err(("Couldn't get Cargo.toml manifest".to_string(), error.to_string()));
             },
         };
 
         let package = match manifest.clone().package {
             Some(package) => package,
             None => {
-                gtk_error("Malformed Cargo.toml", "Couldn't find package section in manifest.", None);
-                std::process::exit(1);
+                return Err(("Malformed Cargo.toml".to_string(), "Couldn't find package section in manifest.".to_string()));
             }
         };
 
         let name = package.name;
         
-        Self {
+        Ok(Self {
             name,
             path: path.to_owned(),
             manifest,
-        }
+        })
     }
 }

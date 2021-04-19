@@ -122,7 +122,13 @@ impl GreeterWindow {
 
                 trace!("Opening Project: {}", path.to_str().unwrap());
 
-                let project = Project::new(&path);
+                let project = match Project::new(&path) {
+                    Ok(project) => project,
+                    Err((main, secondary)) => {
+                        gtk_error(main.as_str(), secondary.as_str(), Some(&window));
+                        std::process::exit(1);
+                    }
+                };
 
                 MainWindow::run(project, &app);
             };
