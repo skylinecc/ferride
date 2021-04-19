@@ -11,7 +11,7 @@ impl MainWindow {
         let window = gtk::ApplicationWindow::new(app);
         window.set_default_size(1200, 650);
 
-        let mut myself = Self {
+        let myself = Self {
             window,
             project,
         };
@@ -24,6 +24,9 @@ impl MainWindow {
         window_box.set_margin_start(12);
         window_box.set_margin_top(12);
         window_box.set_margin_bottom(12);
+
+        let right_label = gtk::Label::new(Some("Right Panel"));
+        let left_label = gtk::Label::new(Some("Left Panel"));
 
         let properties_panel = gtk::Revealer::new();
         properties_panel.set_transition_type(gtk::RevealerTransitionType::SwingRight);
