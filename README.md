@@ -9,9 +9,9 @@
 <img src="https://img.shields.io/github/languages/code-size/skylinecc/ferride">
 </p>
 
-![greeter window](docs/greeter.png)
+<p align="center"><img src="./docs/greeter.png"></p>
+<p align="center"><i>The Welcome Window</i></p>
 
-*The Greeter Window*
 
 ## Contributions
 If you find this project interesting and want to contribute, pull requests and issues are greatly appreciated, I'm trying to make this as fast and efficient as possible.
