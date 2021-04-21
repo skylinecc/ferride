@@ -13,10 +13,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    depends: libgtk-4-dev
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install libgtk-4-dev
+      run: sudo apt-get install libgtk-4-dev
     - name: Build
       run: cargo build --verbose
     - name: Run tests
