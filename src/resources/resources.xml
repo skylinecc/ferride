@@ -3,5 +3,6 @@
   <gresource prefix="/org/skylinecc/Ferride">
     <file>rust_logo.svg</file>
     <file>rustacean-flat-gesture.svg</file>
+    <file preprocess="xml-stripblanks">dock-left-symbolic.svg</file>
   </gresource>
 </gresources>
