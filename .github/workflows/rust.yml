@@ -16,8 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install libgtk-4-dev
-      run: sudo pacman -Syu && sudo pacman -S gtk4
     - name: Build
       run: cargo build --verbose
     - name: Run tests
