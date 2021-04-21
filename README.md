@@ -1,5 +1,5 @@
 # (WIP) Ferride
-<p align="center"><img style="width: 140px; text-align: center;" align="center" src="./src/resources/rustacean-flat-gesture.svg"></img></p>
+<p align="center"><img style="width: 150px" src="./src/resources/rustacean-flat-gesture.svg"></img></p>
 <h2 align="center">Ferride</h2>
 <p align="center">A Simple, Cross Platform IDE for Rust.</p>
 
