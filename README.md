@@ -1,3 +1,10 @@
+```
+Hey! I'm gonna be working on this IDE over the summer, and it'll take me many many hours to complete (hundreds?). I've never been able to find a very simple IDE that "just works" with Rust well so I decided to make my own. I'm gonna dedicate a ton of time to this so if you want to help, any pull requests or issues, or even ideas are welcome.
+
+Thanks!
+- Grant Handy
+```
+
 # (WIP) Ferride
 
 A Simple, Cross-platform Rust IDE.
@@ -8,7 +15,7 @@ A Simple, Cross-platform Rust IDE.
 
 *The Greeter Window*
 
-## Planned Core Features
+## Planned Core Features (Work in Progress To-Do List)
 - [ ] Customizable GTK Interface (Want it to look more legacy, menu bar, etc, no GNOME headerbar type thing so we can use it more natively on Windows and Macos (ew)).
 - [ ] Sections for a terminal, text editor, file manager, and a file overview (structs, functions, traits, enums, etc).
 - [ ] Integrated terminal based on Alacritty (Create our own alacritty-gobject then have easy settings in our applicaiton preferences window).
