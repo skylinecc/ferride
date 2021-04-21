@@ -1,8 +1,11 @@
 # (WIP) Ferride
-
-A Simple, Cross-platform Rust IDE.
-
-"*Ferris' IDE*"
+<table style="width: 100%"><tr>
+<td style="width: 140px; text-align: center;">
+<img width="128px" src="./src/resources/rustacean-flat-gesture.svg" alt="Ferris logo"/></a></td>
+<td>
+<p>Ferride: A Simple, Cross Platform IDE for Rust.
+</td>
+</tr></table>
 
 ![greeter window](docs/greeter.png)
 

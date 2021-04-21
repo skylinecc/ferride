@@ -32,7 +32,7 @@ impl GreeterWindow {
         ));
 
         let title_image = gtk::Image::from_resource("/org/skylinecc/Ferride/rustacean-flat-gesture.svg");
-        title_image.set_size_request(75, 75);
+        title_image.set_size_request(135, 135);
 
         title_box.append(&title_label);
         title_box.append(&title_image);
