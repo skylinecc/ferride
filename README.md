@@ -1,12 +1,13 @@
 # (WIP) Ferride
-<table style="width: 100%"><tr>
-<td style="width: 140px; text-align: center;">
-<img width="128px" src="./src/resources/rustacean-flat-gesture.svg" alt="Ferris logo"/></a></td>
-<td>
-<p>Ferride: A Simple, Cross Platform IDE for Rust.</p>
-</td>
-</tr></table>
+<p align="center"><img style="width: 140px; text-align: center;" align="center" src="./src/resources/rustacean-flat-gesture.svg"></img></p>
+<h2 align="center">Ferride</h2>
+<p align="center">A Simple, Cross Platform IDE for Rust.</p>
 
+<p align="center">
+<a href="https://discord.gg/krPcwnu3Yv"><img src="https://img.shields.io/discord/621844549710381068?logo=discord"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/badge/license-GPL-blue.svg"></a>
+<img src="https://img.shields.io/github/languages/code-size/skylinecc/ferride">
+</p>
 
 ![greeter window](docs/greeter.png)
 
@@ -28,6 +29,6 @@ If you find this project interesting and want to contribute, pull requests and i
 
 ## Some More frivolous Features We Might Want to Add
 - [ ] Custom GTK stylesheets for themes like solarized and monokai like VSCode. (contrary to https://stopthemingmy.app/?)
-- [ ] Our own little ferris icon, make it super cute with a hard hat and a hammer or something :)
+- [X] Our own little ferris icon, make it super cute with a hard hat and a hammer or something :)
 - [ ] Use github and gitlab API to allow user to search up a repository before cloning it.
 - [ ] Link to gitoxide instead of git because gitoxide is written in pure rust meaning that the user won't have to have libgit (gix is still under development)
