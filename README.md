@@ -3,15 +3,19 @@
 <td style="width: 140px; text-align: center;">
 <img width="128px" src="./src/resources/rustacean-flat-gesture.svg" alt="Ferris logo"/></a></td>
 <td>
-<p>Ferride: A Simple, Cross Platform IDE for Rust.
+<p>Ferride: A Simple, Cross Platform IDE for Rust.</p>
 </td>
 </tr></table>
+
 
 ![greeter window](docs/greeter.png)
 
 *The Greeter Window*
 
-## Planned Core Features
+## Contributions
+If you find this project interesting and want to contribute, pull requests and issues are greatly appreciated, I'm trying to make this as fast and efficient as possible.
+
+## Planned Core Features (Work in Progress To-Do List)
 - [ ] Customizable GTK Interface (Want it to look more legacy, menu bar, etc, no GNOME headerbar type thing so we can use it more natively on Windows and Macos (ew)).
 - [ ] Sections for a terminal, text editor, file manager, and a file overview (structs, functions, traits, enums, etc).
 - [ ] Integrated terminal based on Alacritty (Create our own alacritty-gobject then have easy settings in our applicaiton preferences window).
