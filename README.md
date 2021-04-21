@@ -1,8 +1,9 @@
 # (WIP) Ferride
+A Simple, Cross-platform Rust IDE. *(Ferris' IDE)*
 
-A Simple, Cross-platform Rust IDE.
-
-"*Ferris' IDE*"
+[![Discord chat](https://img.shields.io/discord/621844549710381068?logo=discord)](https://discord.gg/krPcwnu3Yv)
+[![GPLv3 licensed](https://img.shields.io/badge/license-GPL-blue.svg)](./LICENSE)
+![Code Size](https://img.shields.io/github/languages/code-size/skylinecc/ferride)
 
 ![greeter window](docs/greeter.png)
 
