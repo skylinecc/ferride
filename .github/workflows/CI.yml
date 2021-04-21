@@ -1,23 +1,18 @@
-name: Rust
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+name: CI
+on: [push]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gtk-rs/gtk4-rs/gtk4:latest
+    container: ghcr.io/gtk-rs/gtk4-rs/gtk4:latest
+
     steps:
     - uses: actions/checkout@v2
-    - uses: actions-rs/toolchain@v1
+    - name: Install Rust
+      run: sudo apt install rust cargo
     - name: Build
       run: cargo build --verbose
     - name: Run tests
