@@ -3,10 +3,12 @@ use gtk::glib::clone;
 use gtk::gio::SimpleAction;
 use crate::project::Project;
 
+#[derive(Clone)]
 pub struct MainWindow {
     application: gtk::Application,
     window: gtk::ApplicationWindow,
     project: Project,
+    side_panel_revealer: gtk::Revealer,
 }
 
 impl MainWindow {
@@ -14,13 +16,16 @@ impl MainWindow {
         let window = gtk::ApplicationWindow::new(app);
         window.set_default_size(1200, 650);
         window.set_title(Some(project.name.as_str()));
+        // window.set_position(gtk::WindowPosition::Center);
 
         let application = app.clone();
+        let side_panel_revealer = gtk::Revealer::new();
 
         let myself = Self {
             application,
             window,
             project,
+            side_panel_revealer,
         };
 
         let content_box = gtk::Box::new(gtk::Orientation::Vertical, 0);
@@ -42,23 +47,20 @@ impl MainWindow {
         let right_label = gtk::Label::new(Some("Right Panel"));
         right_label.set_halign(gtk::Align::Center);
         right_label.set_valign(gtk::Align::Center);
+        right_label.set_hexpand(true);
+        right_label.set_vexpand(true);
         h_box.append(&right_label);
 
         let left_label = gtk::Label::new(Some("Left Panel"));
         left_label.set_halign(gtk::Align::Center);
         left_label.set_valign(gtk::Align::Center);
+        left_label.set_hexpand(true);
+        left_label.set_vexpand(true);
 
-        let side_panel_revealer = gtk::Revealer::new();
-        side_panel_revealer.set_transition_type(gtk::RevealerTransitionType::SlideLeft);
-        side_panel_revealer.set_child(Some(&left_label));
-        side_panel_revealer.set_reveal_child(true);
-        h_box.prepend(&side_panel_revealer);
-
-        let side_panel_toggle_hidden = SimpleAction::new("ToggleSidePanel", None);
-        side_panel_toggle_hidden.connect_activate(move |_, _| {
-            println!("toggled!");
-        });
-        myself.application.set_accels_for_action("win.ToggleSidePanel", &["<Control>equal", "<Control>plus", "<Control>KP_Add"]);
+        myself.side_panel_revealer.set_transition_type(gtk::RevealerTransitionType::SlideLeft);
+        myself.side_panel_revealer.set_child(Some(&left_label));
+        myself.side_panel_revealer.set_reveal_child(true);
+        h_box.prepend(&myself.side_panel_revealer);
 
         myself.window.present();
 
@@ -70,13 +72,21 @@ impl MainWindow {
 
         let run_button = gtk::Button::from_icon_name(Some("system-run"));
         let left_panel_button = gtk::Button::from_icon_name(Some("orientation-portrait-left"));
-        left_panel_button.connect_clicked(move |_| {
-            println!("Clicked hide left panel");
-        });
+        left_panel_button.connect_clicked(clone!(@strong self as myself => move |_| {
+            myself.toggle_side_panel_revealed();
+        }));
 
         bar.pack_start(&left_panel_button);
         bar.pack_end(&run_button);
 
         return bar;
+    }
+
+    fn toggle_side_panel_revealed(&self) {
+        if self.side_panel_revealer.get_child_revealed() {
+            self.side_panel_revealer.set_reveal_child(false);
+        } else {
+            self.side_panel_revealer.set_reveal_child(true);
+        }
     }
 }
