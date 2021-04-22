@@ -31,7 +31,7 @@ impl GreeterWindow {
             "<span weight=\"bold\" size=\"xx-large\">Ferride</span>"
         ));
 
-        let title_image = gtk::Image::from_resource("/org/skylinecc/Ferride/rustacean-flat-gesture.svg");
+        let title_image = gtk::Image::from_resource("/org/skylinecc/Ferride/ferris_ferride.svg");
         title_image.set_size_request(135, 135);
 
         title_box.append(&title_label);

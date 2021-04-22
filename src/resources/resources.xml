@@ -3,6 +3,6 @@
   <gresource prefix="/org/skylinecc/Ferride">
     <file alias="rust_logo.svg">images/rust_logo.svg</file>
     <file alias="ferris_ferride.svg">images/ferris_ferride.svg</file>
-    <file preprocess="xml-stripblanks">dock-left-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">images/dock-left-symbolic.svg</file>
   </gresource>
 </gresources>

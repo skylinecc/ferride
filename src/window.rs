@@ -1,6 +1,5 @@
 use gtk::prelude::*;
 use gtk::glib::clone;
-use gtk::gio::SimpleAction;
 use crate::project::Project;
 
 #[derive(Clone)]
@@ -15,7 +14,7 @@ impl MainWindow {
     pub fn run(project: Project, app: &gtk::Application) -> Self {
         let window = gtk::ApplicationWindow::new(app);
         window.set_default_size(1200, 650);
-        window.set_title(Some(project.name.as_str()));
+        window.set_title(Some(&format!("Ferride - {}", project.name.as_str())));
         // window.set_position(gtk::WindowPosition::Center);
 
         let application = app.clone();
@@ -71,8 +70,13 @@ impl MainWindow {
         let bar = gtk::ActionBar::new();
 
         let run_button = gtk::Button::from_icon_name(Some("system-run"));
-        let left_panel_button = gtk::Button::from_icon_name(Some("orientation-portrait-left"));
-        left_panel_button.connect_clicked(clone!(@strong self as myself => move |_| {
+        let left_panel_button = gtk::ToggleButton::new();
+
+        let orientation_portrait_left = gtk::Image::from_resource("/org/skylinecc/Ferride/images/dock-left-symbolic.svg");
+        left_panel_button.set_child(Some(&orientation_portrait_left));
+        left_panel_button.set_active(true);
+        
+        left_panel_button.connect_toggled(clone!(@strong self as myself => move |_| {
             myself.toggle_side_panel_revealed();
         }));
 
