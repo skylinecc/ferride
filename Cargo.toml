@@ -11,8 +11,9 @@ repository = "https://github.com/skylinecc/ride"
 
 [dependencies]
 gtk = { git = "https://github.com/gtk-rs/gtk4-rs", package = "gtk4" }
-gtk-macros = "0.2.0"
-cargo_toml = "0.8.1"
+gtk-macros = "0.3.0"
+cargo_toml = "0.9.0"
+log = "0.4"
 pretty_env_logger = "0.4.0"
-log = "0.4.14"
+
 # alacritty-gobject = { git = "https://github.com/DefunctLizard/alacritty-gobject" }

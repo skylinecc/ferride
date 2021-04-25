@@ -15,40 +15,13 @@ pub fn rustc_version() -> Result<String, ()> {
     };
 }
 
-pub fn gtk_error(main: &str, bottom: &str, window: Option<&gtk::ApplicationWindow>) {
-    match window {
-        Some(window) => {
-            let message_dialog = gtk::MessageDialogBuilder::new()
-                .transient_for(window)
-                .title(main)
-                .text(bottom)
-                .resizable(false)
-                .use_markup(true)
-                .buttons(gtk::ButtonsType::Ok)
-                .focusable(true)
-                .build();
+pub fn gtk_error<T: AsRef<str>>(title: T, window: Option<&gtk::ApplicationWindow>) {
+    let message_dialog = gtk::Dialog::new_with_buttons(Some(title.as_ref()), window, gtk::DialogFlags::MODAL, &[("Close", gtk::ResponseType::Close)]);
         
-            message_dialog.connect_response(move |d: &gtk::MessageDialog, _: gtk::ResponseType| {
-                d.hide();
-            });
-        
-            message_dialog.show();
-        },
-        None =>{
-            let message_dialog = gtk::MessageDialogBuilder::new()
-                .title(main)
-                .text(bottom)
-                .resizable(false)
-                .use_markup(true)
-                .buttons(gtk::ButtonsType::Ok)
-                .focusable(true)
-                .build();
+    message_dialog.connect_response(move |d, _| {
+        d.hide();
+    });
 
-            message_dialog.connect_response(move |d: &gtk::MessageDialog, _: gtk::ResponseType| {
-                d.hide();
-            });
-
-            message_dialog.show()
-        },
-    };
+    message_dialog.show();
+    std::process::exit(1);
 }

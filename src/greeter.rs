@@ -1,7 +1,7 @@
 use gtk::glib::clone;
 use gtk::prelude::*;
-use crate::window::MainWindow;
-use crate::info::gtk_error;
+use crate::window::ApplicationWindow;
+use crate::info;
 use crate::project::Project;
 
 pub struct GreeterWindow {
@@ -10,12 +10,14 @@ pub struct GreeterWindow {
 
 impl GreeterWindow {
     pub fn build_ui(application: &gtk::Application) -> Self {
-        let window = gtk::ApplicationWindow::new(application);
-        application.add_window(&window);
+        let window = gtk::ApplicationWindowBuilder::new()
+            .title("Welcome")
+            .default_height(300)
+            .default_width(400)
+            .resizable(false)
+            .build();
 
-        window.set_title(Some("Welcome"));
-        window.set_default_size(300, 400);
-        window.set_resizable(false);
+        application.add_window(&window);
 
         let window_box = gtk::Box::new(gtk::Orientation::Vertical, 12);
         window.set_child(Some(&window_box));
@@ -47,7 +49,7 @@ impl GreeterWindow {
         let rustc_version: String = match crate::info::rustc_version() {
             Ok(data) => data,
             Err(_) => {
-                gtk_error("Rust Not Installed", "Ferride requires rust to be installed to compile and execute programs. Please install <a href=\"https://www.rust-lang.org/tools/install\">Rust</a>", Some(&window));
+                info::gtk_error("Rust Not Installed", Some(&window));
 
                 String::from("Rust Not Installed")
             },
@@ -92,7 +94,10 @@ impl GreeterWindow {
 
         // Open Project
         open_button.connect_clicked(clone!(@strong window, @strong application => move |_| {
-            GreeterWindow::open_project(&window, &application);
+            match Self::open_project(&window, &application) {
+                Ok(()) => (),
+                Err(error) => { error!("error: {}", error); }
+            };
         }));
 
         window.present();
@@ -102,7 +107,7 @@ impl GreeterWindow {
         }
     }
 
-    pub fn open_project(window: &gtk::ApplicationWindow, app: &gtk::Application) {
+    pub fn open_project(window: &gtk::ApplicationWindow, app: &gtk::Application) -> Result<(), String> {
         let file_chooser = gtk::FileChooserDialog::new(
             Some("Open Cargo.toml"),
             Some(window),
@@ -124,13 +129,13 @@ impl GreeterWindow {
 
                 let project = match Project::new(&path) {
                     Ok(project) => project,
-                    Err((main, secondary)) => {
-                        gtk_error(main.as_str(), secondary.as_str(), Some(&window));
-                        std::process::exit(1);
+                    Err((main, _)) => {
+                        info::gtk_error(main.as_str(), Some(&window));
+                        return ();
                     }
                 };
 
-                MainWindow::run(project, &app);
+                ApplicationWindow::run(project, &app);
             };
 
             d.close();
@@ -141,5 +146,7 @@ impl GreeterWindow {
         }));
 
         file_chooser.show();
+
+        Ok(())
     }
 }
