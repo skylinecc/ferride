@@ -4,11 +4,13 @@ use crate::window::ApplicationWindow;
 
 pub struct ActionBar {
     pub bar: gtk::ActionBar,
+    pub content_box: gtk::Box,
 }
 
 impl ActionBar {
-    pub fn new(window: &ApplicationWindow) -> Self {
+    pub fn new() -> gtk::Box {
         let bar = gtk::ActionBar::new();
+        let content_box = gtk::Box::new(gtk::Orientation::Vertical, 0);
 
         let run_button = gtk::Button::from_icon_name(Some("system-run"));
         let left_panel_button = gtk::ToggleButton::new();
@@ -21,6 +23,9 @@ impl ActionBar {
         bar.pack_start(&left_panel_button);
         bar.pack_end(&run_button);
 
-        return Self { bar };
+        content_box.append(&bar);
+        content_box.append(&gtk::Separator::new(gtk::Orientation::Horizontal));
+
+        return content_box;
     }
 }
