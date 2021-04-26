@@ -30,12 +30,11 @@ If you find this project interesting and want to contribute, pull requests and i
 - [ ] Allow cloning git repositories and then super simple "add, commit, push" system.
 - [ ] Preview HTML & MD files directly in ferride with live updating using `libwebkitgtk`.
 - [ ] Preview SVG & PNG/JPG (etc etc of course) images directly in ferride using `gdk_pixbuf`
-
-## Some More frivolous Features We Might Want to Add
 - [ ] Custom GTK stylesheets for themes like solarized and monokai like VSCode. (contrary to https://stopthemingmy.app/?)
 - [X] Our own little ferris icon, make it super cute with a hard hat and a hammer or something :)
 - [ ] Use github and gitlab API to allow user to search up a repository before cloning it.
-- [ ] Link to gitoxide instead of git because gitoxide is written in pure rust meaning that the user won't have to have libgit (gitoxide is still under development)
+- [ ] Maybe link to gitoxide instead of git because gitoxide is written in pure rust meaning that the user won't have to have libgit (gitoxide is still under development, it can't clone or push yet :/)
+- [ ] Have ability to build and view documentation for all our dependencies directly in ferride using `libwebkitgtk`.
 
 ### Future References
 A couple of crates we might want to use in the future.
