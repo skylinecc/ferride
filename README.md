@@ -28,10 +28,27 @@ If you find this project interesting and want to contribute, pull requests and i
 - [ ] Configuration files in users $HOME for remembering settings as well as project directories.
 - [ ] Integration with Cargo and Cargo subcommands so ferride has buttons for running, building, and testing examples, targets, and tests.
 - [ ] Allow cloning git repositories and then super simple "add, commit, push" system.
-- [ ] Preview HTML & MD files directly in ferride with live updating using libwebkitgtk.
+- [ ] Preview HTML & MD files directly in ferride with live updating using `libwebkitgtk`.
+- [ ] Preview SVG & PNG/JPG (etc etc of course) images directly in ferride using `gdk_pixbuf`
 
 ## Some More frivolous Features We Might Want to Add
 - [ ] Custom GTK stylesheets for themes like solarized and monokai like VSCode. (contrary to https://stopthemingmy.app/?)
 - [X] Our own little ferris icon, make it super cute with a hard hat and a hammer or something :)
 - [ ] Use github and gitlab API to allow user to search up a repository before cloning it.
-- [ ] Link to gitoxide instead of git because gitoxide is written in pure rust meaning that the user won't have to have libgit (gix is still under development)
+- [ ] Link to gitoxide instead of git because gitoxide is written in pure rust meaning that the user won't have to have libgit (gitoxide is still under development)
+
+### Future References
+A couple of crates we might want to use in the future.
+- https://crates.io/crates/github
+- https://crates.io/crates/gitlab
+- https://crates.io/crates/git2 (https://github.com/Byron/gitoxide)
+- https://crates.io/crates/sourceview4 (https://gitlab.gnome.org/World/Rust/sourceview5-rs)
+- https://crates.io/crates/webkit2gtk
+- https://crates.io/crates/crates-io (https://crates.io/crates/libcratesio)
+- https://github.com/rust-analyzer/rust-analyzer/tree/master/crates/ide
+- https://crates.io/crates/markdown
+- https://crates.io/crates/dirs
+- https://crates.io/crates/serde_yaml
+
+
+
