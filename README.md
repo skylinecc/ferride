@@ -20,7 +20,7 @@ If you find this project interesting and want to contribute, pull requests and i
 
 Just pick one from below :)
 
-## To-Do List
+## Roadmap
 - [X] Write simple greeter/welcome window.
 - [X] Layout project structure and functions for getting Cargo project data.
 - [ ] Setup main project window with functions for each panel and structs (subclassing? no/yes) for UI sections.
