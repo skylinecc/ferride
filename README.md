@@ -26,8 +26,7 @@ Just pick one from below :)
 - [ ] Setup main project window with functions for each panel and structs (subclassing? no/yes) for UI sections.
 - [ ] Sections for a terminal, text editor, file manager.
   - [ ] Terminal - [alacritty](https://github.com/alacritty/alacritty)
-    - [ ] [alacritty-gobject](https://github.com/grantshandy/alacritty-gobject) - Grant
-      - [ ] [gtk-glutin](https://github.com/grantshandy/gtk-glutin) - Grant
+    - [ ] [alacritty-gobject](https://github.com/grantshandy/alacritty-gobject)
   - [ ] Text editor.
     - [ ] [sourceview5-rs](https://gitlab.gnome.org/World/Rust/sourceview5-rs)
     - [ ] [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer/tree/master/crates/ide) ide crate. (how should we get this?).
