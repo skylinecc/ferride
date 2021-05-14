@@ -18,19 +18,36 @@
 ## Contributions
 If you find this project interesting and want to contribute, pull requests and issues are greatly appreciated, I'm trying to make this as fast and efficient as possible.
 
-## Planned Core Features (Work in Progress To-Do List)
-- [ ] Customizable GTK Interface (Want it to look more legacy, menu bar, etc, no GNOME headerbar type thing so we can use it more natively on Windows and Macos (ew)).
-- [ ] Sections for a terminal, text editor, file manager, and a file overview (structs, functions, traits, enums, etc).
-- [ ] Integrated terminal based on Alacritty (Create our own alacritty-gobject then have easy settings in our applicaiton preferences window).
-- [ ] Integrated cargo project preferences into our window so things like name and description can be set from the GUI menu.
-- [ ] Connect to crates.io API so developers can search crates.io from within ferride to search and add new dependencies easier.
-- [ ] Integrated Rust Language completion in GtkSourceView from the rust-analyzer Rust API.
-- [ ] Configuration files in users $HOME for remembering settings as well as project directories.
-- [ ] Integration with Cargo and Cargo subcommands so ferride has buttons for running, building, and testing examples, targets, and tests.
-- [ ] Allow cloning git repositories and then super simple "add, commit, push" system.
+Just pick one from below :)
 
-## Some More frivolous Features We Might Want to Add
-- [ ] Custom GTK stylesheets for themes like solarized and monokai like VSCode. (contrary to https://stopthemingmy.app/?)
-- [X] Our own little ferris icon, make it super cute with a hard hat and a hammer or something :)
-- [ ] Use github and gitlab API to allow user to search up a repository before cloning it.
-- [ ] Link to gitoxide instead of git because gitoxide is written in pure rust meaning that the user won't have to have libgit (gix is still under development)
+## Roadmap
+- [X] Write simple greeter/welcome window.
+- [X] Layout project structure and functions for getting Cargo project data.
+- [ ] Setup main project window with functions for each panel and structs (subclassing? no/yes) for UI sections.
+- [ ] Sections for a terminal, text editor, file manager.
+  - [ ] Terminal - [alacritty](https://github.com/alacritty/alacritty)
+    - [ ] [alacritty-gobject](https://github.com/grantshandy/alacritty-gobject)
+  - [ ] Text editor.
+    - [ ] [sourceview5-rs](https://gitlab.gnome.org/World/Rust/sourceview5-rs)
+    - [ ] [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer/tree/master/crates/ide) ide crate. (how should we get this?).
+  - [ ] File manager.
+- [ ] Integration with Cargo so our run button can run multiple targets, build multiple target, and run different tests all from a drop down menu.
+- [ ] Create config file for ferride in our users home directory.
+  - [ ] [dirs](https://crates.io/crates/dirs)
+  - [ ] [serde-yaml](https://crates.io/crates/serde_yaml)
+- [ ] System preferences that integrate settings between the terminal, text editor, and file manager.
+- [ ] Project preferences window that edit `Cargo.toml` directly (name, version, description, categories, keywords, etc...).
+- [ ] Manage `crates.io` dependencies in `Cargo.toml` from project preferences (search, add, edit, delete, etc...).
+  - [ ] [crates-io](https://crates.io/crates/crates-io)
+- [ ] Allow managing git repositories (clone, fetch, pull, commit, push)
+  - [ ] [git2](https://crates.io/crates/git2)
+  - [ ] [gitoxide](https://github.com/Byron/gitoxide)
+- [ ] Preview `.svg` and `.png`/`.jpg` images directly in the editor.
+- [ ] Preview `.html` and `.md` files directly in the editor with live updates.
+  - [ ] [webkit2gtk](https://crates.io/crates/webkit2gtk)
+  - [ ] [markdown](https://crates.io/crates/markdown)
+- [ ] Set custom GTK stylesheet themes like solarized and monokai in the preferences window (syncs GTK and alacritty).
+- [ ] Use github/gitlab API to search up git repos in a search dialog.
+  - [ ] [github](https://crates.io/crates/github)
+  - [ ] [gitlab](https://crates.io/crates/gitlab)
+- [ ] Build and view documentation for all our cargo dependencies directly, then view in the editor using [webkit2gtk](https://crates.io/crates/webkit2gtk).
