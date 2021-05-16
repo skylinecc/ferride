@@ -54,15 +54,16 @@
 
 //     window.show();
 // }
+mod utils;
+mod welcome;
+
+use utils::{clap_error, parse_cargo_toml_file};
 
 use gtk::prelude::*;
 use gtk::glib;
 use glib::clone;
 
 use clap::{Arg, ArgMatches, app_from_crate, crate_description, crate_version, crate_authors, crate_name};
-use colored::Colorize;
-
-use std::path::{Path, PathBuf};
 
 extern crate pretty_env_logger;
 #[macro_use] extern crate log;
@@ -76,17 +77,16 @@ fn main() {
 
     let matches = app_from_crate!()
         .arg(
-            Arg::with_name("cargo_toml")
-                .short("c")
-                .long("cargo")
-                .value_name("CARGO_TOML")
-                .help("Sets a custom project Cargo.toml to open")
+            Arg::with_name("project")
+                .short("p")
+                .long("project")
+                .value_name("Cargo.toml")
+                .help("Sets a custom project Cargo.toml configuration to open")
                 .takes_value(true)
         )
         .get_matches();
 
-    let application =
-        gtk::Application::new(Some("com.github.gtk-rs.examples.basic"), Default::default()).unwrap();
+    let application = gtk::Application::new(Some("com.github.gtk-rs.examples.basic"), Default::default()).unwrap();
 
     application.connect_activate(move |application| {
         build_ui(application, matches.clone());
@@ -96,9 +96,9 @@ fn main() {
 }
 
 fn build_ui(application: &gtk::Application, matches: ArgMatches) {
-    debug!("main::build_ui");
+    trace!("main::build_ui");
 
-    match matches.value_of("cargo_toml") {
+    match matches.value_of("project") {
         Some(path) => {
             let path = parse_cargo_toml_file(path);
 
@@ -118,32 +118,4 @@ fn build_ui(application: &gtk::Application, matches: ArgMatches) {
 
         },
     };
-}
-
-pub fn parse_cargo_toml_file<T: AsRef<str>>(text: T) -> PathBuf {
-    let path = Path::new(text.as_ref());
-
-    if !path.is_file() {
-        clap_error("The cargo toml package must be a file and not a directory.");
-        std::process::exit(1);
-    } else if !path.ends_with("Cargo.toml") {
-        clap_error("The cargo toml package must be named \"Cargo.toml\"");
-        std::process::exit(1);
-    };
-
-    let pathbuf = match path.canonicalize() {
-        Ok(path) => path,
-        Err(_) => {
-            clap_error("Unable to get path to Cargo.toml");
-            std::process::exit(1);
-        },
-    };
-
-    return pathbuf;
-}
-
-pub fn clap_error<T: AsRef<str>>(text: T) {
-    eprintln!("{} {}\n", "error:".red().bold(), text.as_ref());
-    eprintln!("USAGE:\n    ferride [OPTIONS]\n");
-    eprintln!("For more information try {}", "--help".green());
 }
