@@ -96,22 +96,65 @@ impl WelcomeWindow {
             gtk::FileChooserAction::Open,
             &[("Open", gtk::ResponseType::Ok), ("Cancel", gtk::ResponseType::Cancel)],
         );
+        file_chooser.set_transient_for(Some(self));
         file_chooser.add_filter(&cargo_filter);
 
         file_chooser.connect_response(clone!(@weak application, @weak self as s => move |d: &gtk::FileChooserDialog, response: gtk::ResponseType| {
             if response == gtk::ResponseType::Ok {
-                let file = d.file().expect("Couldn't get file");
-                let filename = file.path().expect("Couldn't get file path");
+                let file = match d.file() {
+                    Some(data) => data,
+                    None => {
+                        s.error("Couldn't get file", "bug prob tbh");
+                        std::process::exit(1);
+                    },
+                };
+
+                let filename = match file.path() {
+                    Some(data) => data,
+                    None => {
+                        s.error("Couldn't get path", "bug probably tbh");
+                        std::process::exit(1);
+                    },
+                };
+
+                let project = match Project::new(&filename) {
+                    Ok(data) => data,
+                    Err(error) => {
+                        s.error("Couldn't create Project", &error.to_string());
+                        std::process::exit(1);
+                    },
+                };
+
+                let window = IdeWindow::new(&application, &project);
 
                 d.close();
                 s.close();
-
-                let project = Project::new(&filename);
-                let window = IdeWindow::new(&application, &project);
+ 
                 window.show();
+            } else if response == gtk::ResponseType::Cancel {
+                d.close();
             };
         }));
 
         file_chooser.show();
+    }
+
+    pub fn error<T: AsRef<str>>(&self, main: T, minor: T) {
+        let dialog = gtk::MessageDialogBuilder::new()
+            .buttons(gtk::ButtonsType::Close)
+            .transient_for(self)
+            .text(main.as_ref())
+            .secondary_text(minor.as_ref())
+            .title("Ferride Error")
+            .can_focus(true)
+            .destroy_with_parent(true)
+            .message_type(gtk::MessageType::Error)
+            .build();
+
+        dialog.connect_response(clone!(@weak self as s => move |d: &gtk::MessageDialog, _: gtk::ResponseType| {
+            d.close();
+        }));
+
+        dialog.show();
     }
 }

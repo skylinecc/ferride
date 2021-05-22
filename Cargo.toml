@@ -15,6 +15,11 @@ clap = "2.33.3"
 log = "0.4"
 pretty_env_logger = "0.4.0"
 colored = "2.0.0"
+cargo_toml = "0.9.1"
+fstream = "0.1.2"
+thiserror = "1.0.24"
 
+# lazy_static = "1.4.0"
+# directories = "3.0.2"
 # once_cell = "1.5"
 # alacritty-gobject = { git = "https://github.com/DefunctLizard/alacritty-gobject" }

@@ -6,9 +6,11 @@ use welcome::WelcomeWindow;
 use window::IdeWindow;
 use project::Project;
 
+// use config::Config;
 use std::path::Path;
 use gtk::prelude::*;
 use clap::{Arg, ArgMatches, app_from_crate, crate_description, crate_version, crate_authors, crate_name};
+use std::sync::RwLock;
 
 extern crate pretty_env_logger;
 #[macro_use] extern crate log;
@@ -16,7 +18,10 @@ extern crate pretty_env_logger;
 pub const APP_DIR: &str = "/org/skylinecc/Ferride/";
 pub const APP_ID: &str = "org.skylinecc.Ferride";
 
+
 fn main() {
+    // println!("{}", CONFIG.read().window_size);
+
     pretty_env_logger::init();
     info!("Welcome to Ferride!");
 
@@ -34,6 +39,9 @@ fn main() {
     let resource_data = gtk::glib::Bytes::from(&include_bytes!("resources/resources.gresource")[..]);
     let res = gtk::gio::Resource::from_data(&resource_data).unwrap();
     gtk::gio::resources_register(&res);
+
+    gtk::glib::set_application_name("Ferride");
+    gtk::glib::set_prgname(Some("ferride"));
 
     let application = gtk::Application::new(Some("org.skylinecc.Ferride"), Default::default());
 
@@ -62,7 +70,14 @@ fn build_ui(application: &gtk::Application, matches: ArgMatches) {
                 },
             };
 
-            let project = Project::new(&pathbuf);
+            let project = match Project::new(&pathbuf) {
+                Ok(data) => data,
+                Err(error) => {
+                    error!("{}", error);
+                    std::process::exit(1);
+                },
+            };
+            
             let window = IdeWindow::new(application, &project);
 
             window.show();

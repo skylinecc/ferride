@@ -18,7 +18,7 @@ impl IdeWindow {
         let window: Self = Object::new(&[("application", app)]).expect("Failed to create WelcomeWindow");
 
         window.set_title(Some(project.path.to_string_lossy().to_string().as_str()));
-        window.set_default_size(1100, 700);
+        window.set_default_size(900, 700);
 
         return window;
     }
